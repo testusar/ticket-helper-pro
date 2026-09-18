@@ -1,0 +1,8 @@
+{
+  "name": "Ticket Helper Pro",
+  "short_name": "THP",
+  "display": "standalone",
+  "start_url": "./",
+  "theme_color": "#9b5cff",
+  "background_color": "#0b0f16"
+}
