@@ -178,7 +178,7 @@ input:focus, select:focus {
   background: var(--card);
 }
 
-/* 그룹화된 서버 카테고리 스타일 (화살표 토글 적용) */
+/* 그룹화된 티켓 카테고리 스타일 */
 .server-group-container {
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -499,8 +499,8 @@ input:focus, select:focus {
       <h2>🔗 즐겨 찾는 티켓 관리</h2>
     </div>
     <div style="margin-bottom:14px;">
-      <input type="text" id="urlTitleInput" placeholder="서버 이름 (예: 인터파크 콘서트관)">
-      <input type="text" id="urlLinkInput" placeholder="서버 주소 (https://...)">
+      <input type="text" id="urlTitleInput" placeholder="티켓 이름 (예: 인터파크 콘서트관)">
+      <input type="text" id="urlLinkInput" placeholder="티켓 주소 (https://...)">
       <button class="action-btn" onclick="addUrl()">티켓 링크 추가</button>
     </div>
     <div id="urlList"></div>
@@ -809,7 +809,6 @@ function renderUrls() {
 
   let htmlContent = "";
 
-  // 1. 일반 서버 렌더링
   normalUrls.forEach(u => {
     htmlContent += `
       <div class="group-item">
@@ -825,7 +824,6 @@ function renderUrls() {
     `;
   });
 
-  // 그룹 렌더링 헬퍼 함수 (화살표 방향 적용: 펼쳐지면 ▼, 접히면 ▶)
   const renderGroupSection = (groupName, groupTitleIcon, groupList) => {
     if (groupList.length === 0) return "";
     const isCollapsed = collapsedGroups[groupName] || false;
@@ -1006,7 +1004,6 @@ function endSeatGame() {
 setInterval(() => {
   renderEvents();
   const now = new Date();
-  events.events?.forEach?.(...) // safe check
   events.forEach(event => {
     const target = new Date(event.date);
     const diff = target - now;
