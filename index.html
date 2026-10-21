@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ticket Pass - Ultimate Pro Smooth</title>
-<meta name="theme-color" content="#ffffff">
+<title>Ticket Pass - Smart Ticketing Helper</title>
+<meta name="theme-color" content="#f8fafc">
 <style>
 :root {
   --bg: #f8fafc;
@@ -23,7 +23,7 @@
   --seat-sold: #cbd5e1;
   --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -2px rgba(0,0,0,0.02);
   --shadow-md: 0 16px 32px -8px rgba(124, 58, 237, 0.08), 0 4px 6px -4px rgba(0,0,0,0.03);
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="dark"] {
@@ -68,7 +68,6 @@ body {
   top: 0; 
   z-index: 100; 
   backdrop-filter: blur(12px);
-  background-color: var(--card);
   transition: var(--transition-smooth);
 }
 .topbar h1 { font-size: 18px; font-weight: 700; color: var(--text); }
@@ -81,26 +80,27 @@ body {
   font-size: 13px; 
   background: var(--bg); 
   padding: 8px 14px; 
-  border-radius: 10px; 
+  border-radius: 12px; 
   text-align: right; 
   border: 1px solid var(--border); 
   transition: var(--transition-smooth);
 }
 .clock-box .server-label { font-size: 10px; color: var(--muted); display: block; font-weight: 500; }
-.clock-box .clock-time { font-size: 14px; font-weight: 700; color: var(--primary); }
+.clock-box .clock-time { font-size: 15px; font-weight: 700; color: var(--primary); font-variant-numeric: tabular-nums; }
 
 .theme-toggle { 
   background: var(--bg); 
   border: 1px solid var(--border); 
   color: var(--text); 
   width: 38px; height: 38px;
-  border-radius: 10px; 
+  border-radius: 12px; 
   cursor: pointer; 
   font-size: 15px; 
   display: flex; align-items: center; justify-content: center;
   transition: var(--transition-smooth); 
 }
-.theme-toggle:hover { background: var(--border); transform: scale(1.08) rotate(15deg); }
+.theme-toggle:hover { background: var(--border); transform: scale(1.05); }
+.theme-toggle:active { transform: scale(0.95); }
 
 main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
 
@@ -108,7 +108,7 @@ main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
 
 .card { 
   background: var(--card); 
-  border-radius: 16px; 
+  border-radius: 20px; 
   padding: 22px; 
   border: 1px solid var(--border); 
   box-shadow: var(--shadow-sm); 
@@ -116,9 +116,9 @@ main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
   margin-bottom: 20px; 
 }
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(124, 58, 237, 0.25);
+  border-color: rgba(124, 58, 237, 0.2);
 }
 
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
@@ -127,7 +127,7 @@ main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
 input, select { 
   width: 100%; 
   padding: 11px 13px; 
-  border-radius: 10px; 
+  border-radius: 12px; 
   border: 1px solid var(--border); 
   font-size: 14px; 
   outline: none; 
@@ -146,7 +146,7 @@ input:focus, select:focus {
   background: var(--bg); 
   border: 1px solid var(--border); 
   padding: 8px 2px; 
-  border-radius: 8px; 
+  border-radius: 10px; 
   font-size: 11px; 
   font-weight: 600; 
   cursor: pointer; 
@@ -154,8 +154,8 @@ input:focus, select:focus {
   transition: var(--transition-smooth); 
   text-align: center; 
 }
-.time-btn:hover { background: var(--border); transform: translateY(-2px); }
-.time-btn:active { transform: translateY(0); }
+.time-btn:hover { background: var(--border); transform: translateY(-1px); }
+.time-btn:active { transform: scale(0.96); }
 .time-btn.reset { background: rgba(220, 38, 38, 0.06); color: var(--danger); border-color: rgba(220, 38, 38, 0.15); }
 .time-btn.reset:hover { background: rgba(220, 38, 38, 0.12); }
 
@@ -164,23 +164,23 @@ input:focus, select:focus {
   color: #fff; 
   border: none; 
   padding: 12px 16px; 
-  border-radius: 10px; 
+  border-radius: 12px; 
   cursor: pointer; 
   font-weight: 600; 
   font-size: 14px; 
   transition: var(--transition-smooth); 
   width: 100%; 
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.18);
 }
-.action-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3); }
-.action-btn:active { transform: translateY(0); }
+.action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25); }
+.action-btn:active { transform: scale(0.98); }
 
-.empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; animation: fadeIn 0.3s ease; }
+.empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
 
 .event-card, .group-item { 
   padding: 14px; 
   border: 1px solid var(--border); 
-  border-radius: 10px; 
+  border-radius: 14px; 
   margin-bottom: 10px; 
   background: var(--bg); 
   display: flex; 
@@ -188,7 +188,6 @@ input:focus, select:focus {
   align-items: center; 
   gap: 10px; 
   transition: var(--transition-smooth); 
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .event-card:hover, .group-item:hover {
   border-color: var(--primary);
@@ -196,14 +195,9 @@ input:focus, select:focus {
   transform: translateX(3px);
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .server-group-container {
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--bg);
   padding: 12px;
   margin-bottom: 12px;
@@ -220,10 +214,10 @@ input:focus, select:focus {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 4px 2px;
   user-select: none;
 }
-.server-group-header:hover { opacity: 0.8; }
+.server-group-header:hover { opacity: 0.85; }
 .toggle-arrow {
   font-size: 11px;
   color: var(--muted);
@@ -246,7 +240,7 @@ input:focus, select:focus {
   pointer-events: none;
 }
 
-.countdown { font-size: 14px; font-weight: 700; color: var(--primary); margin-top: 4px; }
+.countdown { font-size: 14px; font-weight: 700; color: var(--primary); margin-top: 4px; font-variant-numeric: tabular-nums; }
 .countdown.urgent { color: var(--danger); animation: pulse 0.8s infinite alternate; }
 
 @keyframes pulse {
@@ -287,17 +281,17 @@ input:focus, select:focus {
   flex-shrink: 0; 
   transition: var(--transition-smooth); 
 }
-.reserve-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+.reserve-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-.server-time-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 10px; margin-bottom: 15px; transition: var(--transition-smooth); }
+.server-time-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 12px; margin-bottom: 15px; transition: var(--transition-smooth); }
 
-.game-container { background: var(--game-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; position: relative; transition: var(--transition-smooth); }
-.stage-banner { background: var(--border); color: var(--text); padding: 6px; font-size: 11px; font-weight: bold; border-radius: 6px; margin-bottom: 10px; letter-spacing: 2px; }
+.game-container { background: var(--game-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; position: relative; transition: var(--transition-smooth); }
+.stage-banner { background: var(--border); color: var(--text); padding: 6px; font-size: 11px; font-weight: bold; border-radius: 8px; margin-bottom: 10px; letter-spacing: 2px; }
 .seat-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-bottom: 12px; min-height: 140px; align-content: center; }
 .seat { 
   aspect-ratio: 1; 
   background: var(--seat-avail); 
-  border-radius: 6px; 
+  border-radius: 8px; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
@@ -317,7 +311,7 @@ input:focus, select:focus {
   50% { transform: scale(1.2); }
 }
 
-.best-score-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; transition: var(--transition-smooth); }
+.best-score-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; transition: var(--transition-smooth); }
 
 .modal-overlay { 
   position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
@@ -326,27 +320,17 @@ input:focus, select:focus {
   z-index: 1000; 
   backdrop-filter: blur(6px); 
   padding: 16px; 
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .modal-card { 
   background: var(--card); 
   width: 100%; max-width: 420px; 
   padding: 24px; 
-  border-radius: 18px; 
+  border-radius: 20px; 
   box-shadow: 0 20px 30px -5px rgba(0,0,0,0.2); 
   text-align: left; 
   border: 1px solid var(--border); 
-  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transition: var(--transition-smooth);
-}
-@keyframes scaleUp {
-  from { transform: scale(0.9) translateY(10px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 .modal-card h3 { font-size: 18px; margin-bottom: 10px; color: var(--primary); }
@@ -358,7 +342,7 @@ input:focus, select:focus {
   color: #fff; 
   border: none; 
   padding: 10px 18px; 
-  border-radius: 10px; 
+  border-radius: 12px; 
   font-weight: 600; 
   cursor: pointer; 
   font-size: 13px; 
@@ -515,6 +499,7 @@ input:focus, select:focus {
         <option value="https://tickets.interpark.com" data-name="인터파크 티켓 서버" data-offset="120">인터파크 티켓</option>
         <option value="https://ticket.yes24.com" data-name="예스24 티켓 서버" data-offset="-80">예스24 티켓</option>
         <option value="https://ticket.melon.com" data-name="멜론티켓 서버" data-offset="45">멜론티켓</option>
+        <option value="https://www.ticketlink.co.kr" data-name="티켓링크 서버" data-offset="30">티켓링크</option>
       </select>
       <a id="checkServerTimeBtn" href="https://time.navyism.com/?url=https://tickets.interpark.com" target="_blank" class="action-btn" style="display:block; text-align:center; text-decoration:none; background:var(--accent);">🕒 공식 상세 서버 시간 보기</a>
     </div>
@@ -526,7 +511,7 @@ input:focus, select:focus {
     </div>
     <div style="margin-bottom:14px;">
       <input type="text" id="urlTitleInput" placeholder="티켓 이름 (예: 인터파크 콘서트관)">
-      <input type="text" id="urlLinkInput" placeholder="티켓 주소 (https://...)">
+      <input type="text" id="urlLinkInput" placeholder="티켓 주소 (https...)">
       <button class="action-btn" onclick="addUrl()">티켓 링크 추가</button>
     </div>
     <div id="urlList"></div>
@@ -555,7 +540,8 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
   onTopServerChange();
-  updateUI();
+  renderEvents();
+  renderUrls();
   initSeatBoard(false);
   loadBestScore();
 });
@@ -741,13 +727,13 @@ function addEvent() {
   $("serverSelect").value = "";
   $("eventUrlInput").value = "";
   $("eventUrlInput").style.display = "none";
-  updateUI();
+  renderEvents();
 }
 
 function deleteEvent(id) {
   events = events.filter(e => e.id !== id);
   localStorage.setItem('ticketpass_events', JSON.stringify(events));
-  updateUI();
+  renderEvents();
 }
 
 function addUrl() {
@@ -772,13 +758,13 @@ function addUrl() {
   localStorage.setItem('ticketpass_urls', JSON.stringify(urls));
   $("urlTitleInput").value = "";
   $("urlLinkInput").value = "";
-  updateUI();
+  renderUrls();
 }
 
 function deleteUrl(id) {
   urls = urls.filter(u => u.id !== id);
   localStorage.setItem('ticketpass_urls', JSON.stringify(urls));
-  updateUI();
+  renderUrls();
 }
 
 let collapsedGroups = loadStorage('ticketpass_collapsed', {});
@@ -802,11 +788,11 @@ function renderEvents() {
     const isUrgent = diff > 0 && diff <= 60000;
 
     list.innerHTML += `
-      <div class="event-card">
+      <div class="event-card" id="event-card-${event.id}">
         <div style="overflow:hidden;">
           <div style="font-weight:600; margin-bottom:2px; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${event.title}</div>
           <div style="font-size:11px; color:var(--muted);">${event.date.replace('T', ' ')}</div>
-          <div class="countdown ${isUrgent ? 'urgent' : ''}">${getCountdownText(event.date)}</div>
+          <div class="countdown ${isUrgent ? 'urgent' : ''}" id="countdown-${event.id}">${getCountdownText(event.date)}</div>
           <div style="font-size:11px; color:var(--accent); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">사이트: ${event.url}</div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
@@ -815,6 +801,24 @@ function renderEvents() {
         </div>
       </div>
     `;
+  });
+}
+
+function updateCountdownsOnly() {
+  const now = new Date();
+  events.forEach(ev => {
+    const cdElem = $(`countdown-${ev.id}`);
+    if (cdElem) {
+      const target = new Date(ev.date);
+      const diff = target - now;
+      const isUrgent = diff > 0 && diff <= 60000;
+      cdElem.textContent = getCountdownText(ev.date);
+      if (isUrgent) {
+        cdElem.classList.add('urgent');
+      } else {
+        cdElem.classList.remove('urgent');
+      }
+    }
   });
 }
 
@@ -889,11 +893,6 @@ function renderUrls() {
   list.innerHTML = htmlContent;
 }
 
-function updateUI() {
-  renderEvents();
-  renderUrls();
-}
-
 // Seat Game Logic
 let gameInterval = null;
 let gameTimerInterval = null;
@@ -940,7 +939,6 @@ function handleSeatClick(seat) {
 }
 
 function toggleSeatGame() {
-  const btn = $("gameControlBtn");
   if (isGameRunning) {
     stopSeatGame();
   } else {
@@ -1017,7 +1015,7 @@ function stopSeatGame(isFinished = false) {
   }
 }
 
-// Event notification/trigger checker
+// Event notification/trigger & countdown checker
 setInterval(() => {
   const now = new Date();
   events.forEach(ev => {
@@ -1033,7 +1031,7 @@ setInterval(() => {
       }
     }
   });
-  updateUI();
+  updateCountdownsOnly();
 }, 1000);
 </script>
 </body>
