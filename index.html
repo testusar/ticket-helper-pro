@@ -23,7 +23,11 @@
   --seat-sold: #cbd5e1;
   --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -2px rgba(0,0,0,0.02);
   --shadow-md: 0 16px 32px -8px rgba(124, 58, 237, 0.08), 0 4px 6px -4px rgba(0,0,0,0.03);
-  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  --theme-transition: background-color 0.45s var(--ease-smooth), 
+                     color 0.45s var(--ease-smooth), 
+                     border-color 0.45s var(--ease-smooth), 
+                     box-shadow 0.45s var(--ease-smooth);
 }
 
 [data-theme="dark"] {
@@ -51,7 +55,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
   padding: 0 0 40px 0; 
   color: var(--text); 
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: var(--theme-transition);
 }
 
 .topbar { 
@@ -68,10 +72,10 @@ body {
   top: 0; 
   z-index: 100; 
   backdrop-filter: blur(12px);
-  transition: var(--transition-smooth);
+  transition: var(--theme-transition);
 }
-.topbar h1 { font-size: 18px; font-weight: 700; color: var(--text); }
-.subtitle { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.topbar h1 { font-size: 18px; font-weight: 700; color: var(--text); transition: var(--theme-transition); }
+.subtitle { color: var(--muted); font-size: 12px; margin-top: 2px; transition: var(--theme-transition); }
 
 .top-right-group { display: flex; align-items: center; gap: 10px; }
 .clock-box { 
@@ -83,10 +87,23 @@ body {
   border-radius: 12px; 
   text-align: right; 
   border: 1px solid var(--border); 
-  transition: var(--transition-smooth);
+  transition: var(--theme-transition);
 }
-.clock-box .server-label { font-size: 10px; color: var(--muted); display: block; font-weight: 500; }
-.clock-box .clock-time { font-size: 15px; font-weight: 700; color: var(--primary); font-variant-numeric: tabular-nums; }
+.clock-box .server-label { font-size: 10px; color: var(--muted); display: block; font-weight: 500; transition: var(--theme-transition); }
+.clock-box .clock-time { font-size: 15px; font-weight: 700; color: var(--primary); font-variant-numeric: tabular-nums; transition: var(--theme-transition); }
+
+.noti-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--theme-transition), filter 0.2s ease;
+}
+.noti-btn:hover { background: var(--border); filter: brightness(1.05); }
 
 .theme-toggle { 
   background: var(--bg); 
@@ -97,10 +114,11 @@ body {
   cursor: pointer; 
   font-size: 15px; 
   display: flex; align-items: center; justify-content: center;
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), transform 0.4s var(--ease-smooth); 
 }
-.theme-toggle:hover { background: var(--border); transform: scale(1.05); }
-.theme-toggle:active { transform: scale(0.95); }
+.theme-toggle:hover { background: var(--border); filter: brightness(1.05); }
+.theme-toggle:active { transform: scale(0.92); }
+.theme-toggle.rotating { transform: rotate(360deg); }
 
 main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
 
@@ -112,17 +130,16 @@ main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
   padding: 22px; 
   border: 1px solid var(--border); 
   box-shadow: var(--shadow-sm); 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), border-color 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth); 
   margin-bottom: 20px; 
 }
 .card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.3);
 }
 
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-.card-header h2 { font-size: 17px; font-weight: 600; color: var(--text); }
+.card-header h2 { font-size: 17px; font-weight: 600; color: var(--text); transition: var(--theme-transition); }
 
 input, select { 
   width: 100%; 
@@ -131,7 +148,7 @@ input, select {
   border: 1px solid var(--border); 
   font-size: 14px; 
   outline: none; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition); 
   background: var(--input-bg); 
   color: var(--text); 
   margin-bottom: 10px; 
@@ -151,11 +168,11 @@ input:focus, select:focus {
   font-weight: 600; 
   cursor: pointer; 
   color: var(--text); 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), filter 0.2s ease, background-color 0.2s ease; 
   text-align: center; 
 }
-.time-btn:hover { background: var(--border); transform: translateY(-1px); }
-.time-btn:active { transform: scale(0.96); }
+.time-btn:hover { background: var(--border); filter: brightness(1.03); }
+.time-btn:active { transform: scale(0.95); }
 .time-btn.reset { background: rgba(220, 38, 38, 0.06); color: var(--danger); border-color: rgba(220, 38, 38, 0.15); }
 .time-btn.reset:hover { background: rgba(220, 38, 38, 0.12); }
 
@@ -168,14 +185,14 @@ input:focus, select:focus {
   cursor: pointer; 
   font-weight: 600; 
   font-size: 14px; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), background-color 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth); 
   width: 100%; 
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.18);
 }
-.action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25); }
+.action-btn:hover { background: var(--primary-hover); box-shadow: 0 6px 18px rgba(124, 58, 237, 0.28); }
 .action-btn:active { transform: scale(0.98); }
 
-.empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; }
+.empty { text-align: center; padding: 24px; color: var(--muted); font-size: 13px; transition: var(--theme-transition); }
 
 .event-card, .group-item { 
   padding: 14px; 
@@ -187,12 +204,16 @@ input:focus, select:focus {
   justify-content: space-between; 
   align-items: center; 
   gap: 10px; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), border-color 0.25s var(--ease-smooth), background-color 0.25s var(--ease-smooth); 
+  animation: fadeInScale 0.4s var(--ease-smooth);
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .event-card:hover, .group-item:hover {
   border-color: var(--primary);
   background: var(--card);
-  transform: translateX(3px);
 }
 
 .server-group-container {
@@ -201,7 +222,7 @@ input:focus, select:focus {
   background: var(--bg);
   padding: 12px;
   margin-bottom: 12px;
-  transition: var(--transition-smooth);
+  transition: var(--theme-transition);
 }
 .server-group-container:hover {
   border-color: rgba(124, 58, 237, 0.25);
@@ -216,12 +237,13 @@ input:focus, select:focus {
   cursor: pointer;
   padding: 4px 2px;
   user-select: none;
+  transition: var(--theme-transition);
 }
 .server-group-header:hover { opacity: 0.85; }
 .toggle-arrow {
   font-size: 11px;
   color: var(--muted);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s var(--ease-smooth), color 0.4s ease;
 }
 .server-group-content {
   margin-top: 10px;
@@ -230,7 +252,7 @@ input:focus, select:focus {
   gap: 8px;
   max-height: 1000px;
   overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: max-height 0.45s var(--ease-smooth), opacity 0.4s var(--ease-smooth), margin-top 0.4s var(--ease-smooth);
   opacity: 1;
 }
 .server-group-content.collapsed {
@@ -240,12 +262,12 @@ input:focus, select:focus {
   pointer-events: none;
 }
 
-.countdown { font-size: 14px; font-weight: 700; color: var(--primary); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.countdown { font-size: 14px; font-weight: 700; color: var(--primary); margin-top: 4px; font-variant-numeric: tabular-nums; transition: var(--theme-transition); }
 .countdown.urgent { color: var(--danger); animation: pulse 0.8s infinite alternate; }
 
 @keyframes pulse {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0.5; transform: scale(1.02); }
+  0% { opacity: 1; }
+  100% { opacity: 0.5; }
 }
 
 .delete-btn { 
@@ -257,12 +279,13 @@ input:focus, select:focus {
   cursor: pointer; 
   font-size: 11px; 
   font-weight: 600; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), background-color 0.2s ease; 
   flex-shrink: 0; 
 }
-.delete-btn:hover { background: rgba(220, 38, 38, 0.15); transform: scale(1.05); }
+.delete-btn:hover { background: rgba(220, 38, 38, 0.15); }
+.delete-btn:active { transform: scale(0.94); }
 
-.link-anchor { font-weight: 600; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; font-size: 13px; word-break: break-all; transition: var(--transition-smooth); }
+.link-anchor { font-weight: 600; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; font-size: 13px; word-break: break-all; transition: var(--theme-transition); }
 .link-anchor:hover { opacity: 0.8; text-decoration: underline; }
 
 .reserve-btn { 
@@ -279,14 +302,15 @@ input:focus, select:focus {
   align-items: center; 
   gap: 4px; 
   flex-shrink: 0; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition), opacity 0.2s ease; 
 }
-.reserve-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.reserve-btn:hover { opacity: 0.88; }
+.reserve-btn:active { transform: scale(0.95); }
 
-.server-time-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 12px; margin-bottom: 15px; transition: var(--transition-smooth); }
+.server-time-box { background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 12px; margin-bottom: 15px; transition: var(--theme-transition); }
 
-.game-container { background: var(--game-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; position: relative; transition: var(--transition-smooth); }
-.stage-banner { background: var(--border); color: var(--text); padding: 6px; font-size: 11px; font-weight: bold; border-radius: 8px; margin-bottom: 10px; letter-spacing: 2px; }
+.game-container { background: var(--game-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; position: relative; transition: var(--theme-transition); }
+.stage-banner { background: var(--border); color: var(--text); padding: 6px; font-size: 11px; font-weight: bold; border-radius: 8px; margin-bottom: 10px; letter-spacing: 2px; transition: var(--theme-transition); }
 .seat-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-bottom: 12px; min-height: 140px; align-content: center; }
 .seat { 
   aspect-ratio: 1; 
@@ -299,19 +323,20 @@ input:focus, select:focus {
   color: white; 
   font-weight: bold; 
   cursor: pointer; 
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease; 
+  transition: background-color 0.3s var(--ease-smooth), filter 0.2s ease, transform 0.15s var(--ease-smooth); 
   box-shadow: 0 2px 4px rgba(0,0,0,0.06); 
 }
-.seat:hover { transform: scale(1.12); filter: brightness(1.1); }
-.seat.sold { background: var(--seat-sold); cursor: not-allowed; transform: none !important; opacity: 0.6; }
-.seat.selected { background: var(--seat-selected); animation: bounceSeat 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+.seat:hover { filter: brightness(1.15); transform: scale(1.05); }
+.seat:active { transform: scale(0.92); }
+.seat.sold { background: var(--seat-sold); cursor: not-allowed; transform: none !important; opacity: 0.6; filter: none; }
+.seat.selected { background: var(--seat-selected); animation: bounceSeat 0.3s var(--ease-smooth); }
 
 @keyframes bounceSeat {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.2); }
 }
 
-.best-score-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; transition: var(--transition-smooth); }
+.best-score-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; transition: var(--theme-transition); }
 
 .modal-overlay { 
   position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
@@ -320,6 +345,11 @@ input:focus, select:focus {
   z-index: 1000; 
   backdrop-filter: blur(6px); 
   padding: 16px; 
+  animation: fadeIn 0.4s var(--ease-smooth);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-card { 
@@ -330,13 +360,18 @@ input:focus, select:focus {
   box-shadow: 0 20px 30px -5px rgba(0,0,0,0.2); 
   text-align: left; 
   border: 1px solid var(--border); 
-  transition: var(--transition-smooth);
+  transition: var(--theme-transition);
+  animation: popIn 0.4s var(--ease-smooth);
+}
+@keyframes popIn {
+  from { transform: scale(0.9) translateY(16px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.modal-card h3 { font-size: 18px; margin-bottom: 10px; color: var(--primary); }
-.modal-card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.modal-card h3 { font-size: 18px; margin-bottom: 10px; color: var(--primary); transition: var(--theme-transition); }
+.modal-card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; transition: var(--theme-transition); }
 .modal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
-.checkbox-label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.checkbox-label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; cursor: pointer; transition: var(--theme-transition); }
 .modal-close-btn { 
   background: var(--primary); 
   color: #fff; 
@@ -347,14 +382,14 @@ input:focus, select:focus {
   cursor: pointer; 
   font-size: 13px; 
   width: 100%; 
-  transition: var(--transition-smooth); 
+  transition: var(--theme-transition); 
 }
 .modal-close-btn:hover { background: var(--primary-hover); }
 
 @media(max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
   .topbar { padding: 14px 16px; flex-direction: column; align-items: stretch; position: relative; }
-  .top-right-group { justify-content: space-between; }
+  .top-right-group { justify-content: space-between; flex-wrap: wrap; }
   .clock-box { flex: 1; text-align: center; }
   .time-btn-group { grid-template-columns: repeat(3, 1fr); }
 }
@@ -385,6 +420,8 @@ input:focus, select:focus {
     <p class="subtitle">스마트 티켓팅 서버 예약 및 시간 도우미</p>
   </div>
   <div class="top-right-group">
+    <button class="noti-btn" onclick="requestNotificationPermission()" id="notiPermissionBtn">🔔 알림 허용</button>
+    <button class="noti-btn" onclick="testDesktopNotification()" title="데스크톱 알림 테스트">🧪 알림 테스트</button>
     <div class="clock-box">
       <span class="server-label" id="topServerLabel">🌐 인터파크 티켓 서버</span>
       <span class="clock-time" id="clock">00:00:00.000</span>
@@ -401,7 +438,6 @@ input:focus, select:focus {
       <h2>⏱ 공연 일정 등록</h2>
     </div>
     <div>
-      <input type="text" id="eventTitleInput" placeholder="공연 또는 경기 이름 입력">
       <input type="datetime-local" id="eventDateInput" step="1">
 
       <select id="serverSelect" onchange="onServerSelectChange()">
@@ -530,6 +566,69 @@ function loadStorage(key, fallback) {
   }
 }
 
+// 브라우저 데스크톱 알림 권한 및 전송 로직
+function requestNotificationPermission() {
+  if (!("Notification" in window)) {
+    alert("현재 브라우저는 데스크톱 알림을 지원하지 않습니다.");
+    return;
+  }
+
+  Notification.requestPermission().then(permission => {
+    updateNotiBtnState(permission);
+  });
+}
+
+function updateNotiBtnState(permission) {
+  const btn = document.getElementById("notiPermissionBtn");
+  if (!btn) return;
+  
+  if (permission === "granted") {
+    btn.textContent = "🔔 알림 활성화됨";
+    btn.style.borderColor = "var(--primary)";
+    btn.style.color = "var(--primary)";
+  } else if (permission === "denied") {
+    btn.textContent = "🔕 알림 차단됨";
+    btn.style.borderColor = "var(--danger)";
+    btn.style.color = "var(--danger)";
+  } else {
+    btn.textContent = "🔔 알림 허용";
+  }
+}
+
+function sendDesktopNotification(title, bodyUrl) {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+
+  const noti = new Notification(`🎫 Ticket Pass 정각 알림!`, {
+    body: `"${title}" 예매가 시작되었습니다! 지금 클릭하여 이동하세요.`,
+    icon: 'https://cdn-icons-png.flaticon.com/512/1950/1950715.png',
+    requireInteraction: true
+  });
+
+  noti.onclick = function() {
+    window.focus();
+    if (bodyUrl) window.open(bodyUrl, '_blank');
+    noti.close();
+  };
+}
+
+function testDesktopNotification() {
+  if (!("Notification" in window)) {
+    alert("현재 브라우저는 데스크톱 알림을 지원하지 않습니다.");
+    return;
+  }
+
+  if (Notification.permission !== "granted") {
+    Notification.requestPermission().then(permission => {
+      updateNotiBtnState(permission);
+      if (permission === "granted") {
+        sendDesktopNotification("알림 테스트", "https://tickets.interpark.com");
+      }
+    });
+  } else {
+    sendDesktopNotification("알림 테스트", "https://tickets.interpark.com");
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('ticketpass_dont_show_intro') !== 'true') {
     document.getElementById('introModal').style.display = 'flex';
@@ -539,6 +638,10 @@ window.addEventListener('DOMContentLoaded', () => {
   document.body.setAttribute('data-theme', savedTheme);
   document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
+  if ("Notification" in window) {
+    updateNotiBtnState(Notification.permission);
+  }
+
   onTopServerChange();
   renderEvents();
   renderUrls();
@@ -547,11 +650,21 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function toggleTheme() {
+  const btn = document.getElementById('themeBtn');
+  btn.classList.add('rotating');
+  
   const currentTheme = document.body.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  document.body.setAttribute('data-theme', newTheme);
-  localStorage.setItem('ticketpass_theme', newTheme);
-  document.getElementById('themeBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  
+  setTimeout(() => {
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('ticketpass_theme', newTheme);
+    btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  }, 150);
+
+  setTimeout(() => {
+    btn.classList.remove('rotating');
+  }, 400);
 }
 
 function closeIntroModal() {
@@ -696,12 +809,24 @@ function getCountdownText(targetDateStr) {
 }
 
 function addEvent() {
-  const title = escapeHtml($("eventTitleInput").value.trim());
   const date = $("eventDateInput").value;
+  const selectElem = $("serverSelect");
   let targetUrl = $("eventUrlInput").value.trim();
+  
+  let title = "티켓팅 예약";
+  if (selectElem.selectedIndex > 0 && selectElem.value !== "custom") {
+    title = selectElem.options[selectElem.selectedIndex].text;
+  } else if (targetUrl) {
+    try {
+      const parsed = new URL(targetUrl.startsWith('http') ? targetUrl : 'https://' + targetUrl);
+      title = parsed.hostname;
+    } catch (_) {
+      title = "티켓팅 예약";
+    }
+  }
 
-  if(!title || !date || !targetUrl) {
-    alert("공연 이름, 예약 시간, 티켓팅 사이트를 모두 입력/선택해주세요!");
+  if(!date || !targetUrl) {
+    alert("예약 시간 및 티켓팅 사이트를 모두 선택/입력해주세요!");
     return;
   }
 
@@ -719,10 +844,13 @@ function addEvent() {
     return;
   }
 
-  events.push({ id: Date.now(), title, date, url: targetUrl, triggered: false });
+  events.push({ id: Date.now(), title: escapeHtml(title), date, url: targetUrl, triggered: false });
   localStorage.setItem('ticketpass_events', JSON.stringify(events));
   
-  $("eventTitleInput").value = "";
+  if ("Notification" in window && Notification.permission !== "granted") {
+    requestNotificationPermission();
+  }
+
   $("eventDateInput").value = "";
   $("serverSelect").value = "";
   $("eventUrlInput").value = "";
@@ -999,14 +1127,13 @@ function stopSeatGame(isFinished = false) {
   });
 
   if (isFinished) {
-    $("gameStatusText").textContent = `게임 종료! 총 ${gameScore}석 성공!`;
     const best = loadStorage('ticketpass_best_score', 0);
     if (gameScore > best) {
       localStorage.setItem('ticketpass_best_score', gameScore);
       $("bestScoreDisplay").textContent = `${gameScore}석 성공 (NEW!)`;
-      alert(`🎉 최고 기록 달성! ${gameScore}석을 성공하셨습니다!`);
+      $("gameStatusText").textContent = `🎉 신기록 달성! 총 ${gameScore}석 성공!`;
     } else {
-      alert(`⏰ 시간 종료! 총 ${gameScore}석을 예매하셨습니다.`);
+      $("gameStatusText").textContent = `⏰ 시간 종료! 총 ${gameScore}석 성공!`;
     }
     loadBestScore();
   } else {
@@ -1025,9 +1152,12 @@ setInterval(() => {
       if (diff <= 0) {
         ev.triggered = true;
         localStorage.setItem('ticketpass_events', JSON.stringify(events));
-        if (confirm(`"${ev.title}" 티켓팅 시작 시간입니다! 지금 바로 이동하시겠습니까?`)) {
-          window.open(ev.url, '_blank');
-        }
+        
+        // 1) 데스크톱 Push 알림 발송
+        sendDesktopNotification(ev.title, ev.url);
+        
+        // 2) 즉시 예매 페이지 탭 오픈
+        window.open(ev.url, '_blank');
       }
     }
   });
